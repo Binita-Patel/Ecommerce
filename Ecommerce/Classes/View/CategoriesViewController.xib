@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="none" rowHeight="72" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="YXT-l9-o7a">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Pfn-7x-7WC"/>
                         <outlet property="delegate" destination="-1" id="Gh0-jV-0N2"/>
@@ -29,7 +29,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YXT-l9-o7a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="0oy-77-FrW"/>
-                <constraint firstItem="YXT-l9-o7a" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="77i-B1-mt3"/>
+                <constraint firstItem="YXT-l9-o7a" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="33" id="77i-B1-mt3"/>
                 <constraint firstItem="YXT-l9-o7a" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8cP-Zx-MiJ"/>
                 <constraint firstItem="YXT-l9-o7a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aLr-Td-uTn"/>
             </constraints>
