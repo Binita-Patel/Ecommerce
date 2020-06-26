@@ -1,0 +1,24 @@
+PODS:
+  - MBProgressHUD (1.2.0)
+  - ReachabilitySwift (5.0.0)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - MBProgressHUD
+  - ReachabilitySwift
+  - SwiftyJSON
+
+SPEC REPOS:
+  trunk:
+    - MBProgressHUD
+    - ReachabilitySwift
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: 3a8026e58fd1c7fa3f4c3797c37b7f44b832b2f2
+
+COCOAPODS: 1.8.4

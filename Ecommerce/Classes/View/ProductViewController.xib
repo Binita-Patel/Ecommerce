@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductViewController" customModule="Ecommerce" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionVw" destination="JCg-yB-Pvt" id="Yvm-vY-H9L"/>
+                <outlet property="pickerViewRanking" destination="cgC-WZ-in9" id="mae-aQ-cXJ"/>
+                <outlet property="toolbarPicker" destination="V96-pI-gfi" id="a8u-oT-Ans"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JCg-yB-Pvt">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bAy-9r-Ojh">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LrZ-dr-Mvv"/>
+                        <outlet property="delegate" destination="-1" id="Dig-R0-wQ9"/>
+                    </connections>
+                </collectionView>
+                <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V96-pI-gfi">
+                    <rect key="frame" x="0.0" y="400" width="375" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="V96-pI-gfi" secondAttribute="height" multiplier="75:10" id="72Z-Z3-bOB"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem tag="102" title="Cancel" id="oKQ-l6-ccI">
+                            <connections>
+                                <action selector="actionCancelPicker:" destination="-1" id="ebo-u9-0yi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="m2a-jm-Xky"/>
+                        <barButtonItem tag="101" title="Done" width="73" id="OvP-pS-kk0">
+                            <connections>
+                                <action selector="actionDonePicker:" destination="-1" id="API-sZ-5ng"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgC-WZ-in9">
+                    <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="u6X-cc-Zzb"/>
+                        <outlet property="delegate" destination="-1" id="nDC-AB-uVo"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cgC-WZ-in9" firstAttribute="bottom" secondItem="JCg-yB-Pvt" secondAttribute="bottom" id="4nt-sk-Gxz"/>
+                <constraint firstItem="cgC-WZ-in9" firstAttribute="trailing" secondItem="JCg-yB-Pvt" secondAttribute="trailing" id="7z4-dp-8fO"/>
+                <constraint firstItem="V96-pI-gfi" firstAttribute="leading" secondItem="cgC-WZ-in9" secondAttribute="leading" id="9Mm-hX-fbM"/>
+                <constraint firstItem="JCg-yB-Pvt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="FJh-Ba-utu"/>
+                <constraint firstItem="JCg-yB-Pvt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ROi-FX-MHo"/>
+                <constraint firstItem="JCg-yB-Pvt" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="XFw-7f-MNd"/>
+                <constraint firstItem="V96-pI-gfi" firstAttribute="trailing" secondItem="cgC-WZ-in9" secondAttribute="trailing" id="hoG-A8-fsI"/>
+                <constraint firstItem="JCg-yB-Pvt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="qKf-Yz-fhW"/>
+                <constraint firstItem="cgC-WZ-in9" firstAttribute="top" secondItem="V96-pI-gfi" secondAttribute="bottom" constant="1" id="sVX-cd-wfe"/>
+                <constraint firstItem="V96-pI-gfi" firstAttribute="width" secondItem="V96-pI-gfi" secondAttribute="height" multiplier="75:10" id="uF2-sP-fj1"/>
+                <constraint firstItem="cgC-WZ-in9" firstAttribute="leading" secondItem="JCg-yB-Pvt" secondAttribute="leading" id="y0c-tc-LkU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="122.78860569715144"/>
+        </view>
+    </objects>
+</document>

@@ -8,29 +8,27 @@
 
 import UIKit
 import CoreData
-
+import MBProgressHUD
+import Reachability
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+       var reachability = try? Reachability()
+       var lblInternetError = UILabel()
 
+       var isReachable: Bool = true
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        startReachablity()
+        setMainScreen()
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+   func applicationWillEnterForeground(_ application: UIApplication) {
+            // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+            startReachablity()
     }
 
     // MARK: - Core Data stack
@@ -78,5 +76,112 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    //MARK:- Start & Stop Loader
+
+       func startLoader(_ view:UIView) {
+           DispatchQueue.main.async {
+               let hud =  MBProgressHUD.showAdded(to:view, animated: true)
+               hud.label.text = "Loading..."
+               hud.label.textColor = UIColor.white
+               hud.bezelView.color = ColorFont.GrayDark.withAlphaComponent(0.8)
+               hud.bezelView.style = .solidColor
+               hud.contentColor = UIColor.white
+           }
+       }
+       
+       func stopLoader(_ view:UIView) {
+           DispatchQueue.main.async {
+               MBProgressHUD.hide(for: view, animated: true)
+               MBProgressHUD().removeFromSuperViewOnHide = true
+           }
+       }
+
+       //MARK:- Set Main screen
+       func setMainScreen() {
+         
+             let categoriesVC = CategoriesViewController.init(nibName: "CategoriesViewController", bundle: nil)
+               let frame = UIScreen.main.bounds
+               self.window = UIWindow(frame: frame)
+               let navCtrl: UINavigationController = UINavigationController(rootViewController: categoriesVC)
+               navCtrl.isNavigationBarHidden = false
+               self.window?.rootViewController = navCtrl
+               self.window?.makeKeyAndVisible()
+           
+       }
+
+       //MARK:- Reachablity
+       func startReachablity(){
+           
+           NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+           do{
+               try reachability?.startNotifier()
+           }catch{
+               print("could not start reachability notifier")
+           }
+       }
+       
+       @objc func reachabilityChanged(note: Notification) {
+           
+           let reachability = note.object as! Reachability
+           if  reachability.connection == .unavailable{
+               isReachable = false
+               showInternetError()
+
+           }
+           else {
+            if(isReachable == false) {
+                NotificationCenter.default.post(name: .didReceiveData, object: nil)
+
+            }
+               isReachable = true
+
+               removeInternetError()
+
+           }
+      
+       }
+       
+       func stopReachablity(){
+           reachability?.stopNotifier()
+           NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+       }
+       
+       func showInternetError(){
+           
+           if(lblInternetError.isHidden == false) {
+               lblInternetError.removeFromSuperview()
+               
+           }
+                 
+           lblInternetError.frame = CGRect(x: 0, y: 90, width: UIScreen.main.bounds.width, height: 50)
+           
+           lblInternetError.text = "Please check your internet connection"
+           lblInternetError.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+           lblInternetError.textColor = UIColor.white
+           lblInternetError.numberOfLines = 0
+           lblInternetError.textAlignment = .center
+           lblInternetError.backgroundColor = UIColor.gray
+           lblInternetError.alpha = 1
+           lblInternetError.isHidden = false
+           window?.addSubview(lblInternetError)
+           
+       }
+       
+       func removeInternetError(){
+           if lblInternetError.alpha == 1{
+               UIView.animate(withDuration: 2, delay: 1, options: [], animations: {
+                   self.lblInternetError.alpha = 0
+               }, completion: {_ in
+                   self.lblInternetError.isHidden = true
+                   self.lblInternetError.removeFromSuperview()
+               })
+           }else{
+               
+           }
+       }
+
 }
 
+extension Notification.Name {
+    static let didReceiveData = Notification.Name("didReceiveData")
+}
